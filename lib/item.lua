@@ -18,13 +18,13 @@ function Item.new(x, y)
       return nil
    end
 
-   function item:play(name, force)
+   function item:play(name, force, callback)
       local a = self:getAnimation(name)
       if a then
 	 local f = force or false
 	 self.curr_anim = a
 	 if not a.active or f then
-	    a:start(self)
+	    a:start(self, callback)
 	 end
       else
 	 print("Animation not found: " .. name)

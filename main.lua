@@ -133,7 +133,7 @@ function app:update(dt)
 
 	 p:kill()
 	 self.camera:play("shake")
-	 self.flash:play("flash", app.reset(self) )
+	 self.flash:play("flash", true, function() app:reset() end)
       end
    elseif p.x < 5 then
       p.x = 5;
@@ -159,7 +159,9 @@ function love.keypressed(k)
    if k == 'escape' then
       love.event.push('quit')
    elseif k == " " then
-      app.player:flap()
+      if app.player.alive then
+	 app.player:flap()
+      end
    end
 end
 

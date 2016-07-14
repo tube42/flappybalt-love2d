@@ -7,10 +7,8 @@ function Player.new(x, y)
    local player = Sprite.new(x, y, img_dove)
 
    function player:update(dt)
-      if self.alive then
-	 self:updateMotion(dt)
-	 self:updateAnimation(dt)
-      end
+      self:updateMotion(dt)
+      self:updateAnimation(dt)
    end
 
    function player:flap()
@@ -25,6 +23,8 @@ function Player.new(x, y)
    function player:kill()
       if self.alive then
 	 self.alive = false
+	 self.vx = 0
+	 self.ax = 0
       end
    end
 

@@ -74,8 +74,8 @@ function Animation.newKey(frames, fps, loop)
 end
 
 function Animation.newFlash(frames)
-   frames = frames or { 255, 0, 255, 0, 255, 0, 255 }
-   local anim = Animation.new(frames, 20, false)
+   frames = frames or { 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255 }
+   local anim = Animation.new(frames, 10, false)
 
    function anim:onStarted()
       self.org_alpha = self.target.alpha
