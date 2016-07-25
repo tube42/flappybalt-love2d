@@ -11,11 +11,18 @@ Animation = require("lib/animation")
 Paddle = require("paddle")
 Player = require("player")
 
-local SCALE = 3
+-- make it work on both 0.9.x (PC) and 0.10.x (phone)
+local getWidth = love.window.getWidth or love.graphics.getWidth
+local getHeight = love.window.getHeight or love.graphics.getHeight
+
+local SCALE = math.floor( math.max( 1, math.min( getWidth() / 160, getHeight() / 240)))
+
+local x0 = math.floor( (getWidth() / SCALE - 160) / 2)
+local y0 = math.floor( (getHeight() / SCALE - 240) / 2)
 
 local app = { items = {}, score = 0 }
-local sw = love.window:getWidth() / SCALE
-local sh = love.window:getHeight() / SCALE
+local sw = 160
+local sh = 240
 
 function app:load()
    local img_bg = utils.loadImage("assets/background.png", 1)
@@ -24,7 +31,10 @@ function app:load()
    self.scoreBest = self:loadScore()
    self.camera = require("lib/camera")
    self.camera.scale = SCALE
+   self.camera.x = -x0 * SCALE
+   self.camera.y = -y0 * SCALE
    self.camera:addAnimation("shake", Animation.newShake())
+   love.graphics.setBackgroundColor( 176, 176, 191)
 
    self.bg = Sprite.new(0, 0, img_bg)
    self.flash = Rect.new(0, 0, sw, sh)
@@ -151,6 +161,14 @@ function app:update(dt)
       self.scoreDisplay.text = tostring(self.score)
       br:play("flash")
       pl:randomize()
+   end
+end
+
+function love.mousepressed(x,y,button,istouch)
+   if istouch then
+      if app.player.alive then
+	 app.player:flap()
+      end
    end
 end
 
