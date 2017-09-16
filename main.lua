@@ -11,9 +11,9 @@ Animation = require("lib/animation")
 Paddle = require("paddle")
 Player = require("player")
 
--- make it work on both 0.9.x (PC) and 0.10.x (phone)
-local getWidth = love.window.getWidth or love.graphics.getWidth
-local getHeight = love.window.getHeight or love.graphics.getHeight
+--
+local getWidth = love.graphics.getWidth
+local getHeight = love.graphics.getHeight
 
 local SCALE = math.floor( math.max( 1, math.min( getWidth() / 160, getHeight() / 240)))
 
@@ -164,11 +164,9 @@ function app:update(dt)
    end
 end
 
-function love.mousepressed(x,y,button,istouch)
-   if istouch then
-      if app.player.alive then
-	 app.player:flap()
-      end
+function love.mousepressed(x,y,button)
+   if app.player.alive then
+      app.player:flap()
    end
 end
 
