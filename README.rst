@@ -1,7 +1,7 @@
 flappybalt-Löve2d
 =================
 
- .. image:: http://tube42.github.io/flappybalt/img/flappy-love.png
+ .. image:: doc/flappy-love.png
 
 
 This is my `löve2d <https://love2d.org/>`_ port of `FlappyBalt <https://github.com/AdamAtomic/Flappybalt>`_ by Adam Atomics originally written in AS3 and Flixel.
